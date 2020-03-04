@@ -1,6 +1,7 @@
 package com.gft.gerenciador.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -9,33 +10,57 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModelProperty;
 
 @Entity
 public class Evento {
 
 	@Id
+	@ApiModelProperty(example = "1")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@ApiModelProperty(example = "Legiao Urbana")
 	@NotEmpty(message = "O campo nome não pode ser vazio.")
 	private String nome;
 	
 	@JsonInclude(Include.NON_NULL)
+	@NotEmpty(message = "O campo data não pode ser vazio.")
+	@ApiModelProperty(example = "20/02/2020")
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private Date data;
 	
 	@JsonInclude(Include.NON_NULL)
+	@ApiModelProperty(example = "100.00")
 	private double valorIngresso;
 	
 	@ManyToOne()
 	@JoinColumn(name = "CASA_ID")
 	private Casa casa;
 	
+	@OneToMany(mappedBy = "evento", cascade = CascadeType.ALL)
+	@JsonIgnore
+	private List<Vendas> vendas;
+	
+	
+	
+	public List<Vendas> getVendas() {
+		return vendas;
+	}
+
+	public void setVendas(List<Vendas> vendas) {
+		this.vendas = vendas;
+	}
+
 	public Casa getCasa() {
 		return casa;
 	}

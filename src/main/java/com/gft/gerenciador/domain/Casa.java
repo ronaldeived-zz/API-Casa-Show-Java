@@ -14,18 +14,23 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+import io.swagger.annotations.ApiModelProperty;
+
 
 
 @Entity
 public class Casa {
 
 	@Id
+	@ApiModelProperty(example = "1")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@ApiModelProperty(example = "Nome casa de show")
 	@NotEmpty(message = "O campo nome não pode ser vazio.")
 	private String nome;
 	
+	@ApiModelProperty(example = "Rua ou avenida")
 	@JsonInclude(Include.NON_NULL)
 	private String endereco;
 	

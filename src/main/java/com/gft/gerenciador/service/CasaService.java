@@ -9,7 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.gft.gerenciador.domain.Casa;
 import com.gft.gerenciador.repository.CasaRepository;
-import com.gft.gerenciador.service.exceptions.CasaNaoEncontradaException;
+import com.gft.gerenciador.service.exceptions.casa.CasaExistenteException;
+import com.gft.gerenciador.service.exceptions.casa.CasaNaoEncontradaException;
 
 @Service
 public class CasaService {
@@ -18,7 +19,14 @@ public class CasaService {
 	private CasaRepository casas;
 	
 	public Casa salvar(Casa casa) {
-		casa.setId(null);
+		
+		if (casa.getId() != null) {
+			Optional<Casa> a = casas.findById(casa.getId());
+			
+			if (a.isPresent()) {
+				throw new CasaExistenteException("A casa já existe");
+			}
+		}
 		return casas.save(casa);
 	}
 	
@@ -34,7 +42,7 @@ public class CasaService {
 		Optional<Casa> casa = casas.findById(id);
 		
 		if (casa.isEmpty()) {
-			throw new CasaNaoEncontradaException("O livro não foi encontrado.");
+			throw new CasaNaoEncontradaException("A casa não foi encontrado.");
 		}
 		casa.get();
 		return casa;

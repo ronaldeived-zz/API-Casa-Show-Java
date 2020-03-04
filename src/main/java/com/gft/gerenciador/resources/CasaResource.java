@@ -23,21 +23,31 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.gft.gerenciador.domain.Casa;
 import com.gft.gerenciador.service.CasaService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+
 
 @RestController
+@Api(tags = "Casas")
 @RequestMapping(value = "/casas")
 public class CasaResource {
 
 	@Autowired
 	private CasaService casaService;
 	
+	
+	@ApiOperation("Lista as casas de show")
 	@GetMapping()
 	public ResponseEntity<List<Casa>> listar() {
 		return ResponseEntity.status(HttpStatus.OK).body(casaService.listar());
 	}
 	
+	@ApiOperation("Salva casa de show")
 	@PostMapping
-	public ResponseEntity<Void> salvar(@Valid @RequestBody Casa casa) {
+	public ResponseEntity<Void> salvar(
+			@ApiParam(name = "Corpo", value = "Representação de uma casa")
+			@Valid @RequestBody Casa casa) {
 		
 		casa = casaService.salvar(casa);
 		
@@ -47,8 +57,11 @@ public class CasaResource {
 		return ResponseEntity.created(uri).build();
 	}
 	
+	@ApiOperation("Busca casa de show")
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<?> buscar(@PathVariable("id") Long id) {
+	public ResponseEntity<?> buscar(
+			@ApiParam(value = "ID de uma casa" , example = "1")
+			@PathVariable("id") Long id) {
 		
 		CacheControl cacheControl = CacheControl.maxAge(20, TimeUnit.SECONDS);
 		
@@ -56,19 +69,30 @@ public class CasaResource {
 		return ResponseEntity.status(HttpStatus.OK).cacheControl(cacheControl).body(casa);
 	}
 	
+	@ApiOperation("Deleta casa de show")
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Void> deletar(@PathVariable("id") Long id) {
+	public ResponseEntity<Void> deletar(
+			@ApiParam(value = "ID de uma casa" , example = "1")
+			@PathVariable("id") Long id) {
 		
 		casaService.deletar(id);
 		return ResponseEntity.noContent().build();
 	}
 	
+	@ApiOperation("Atualiza casa de show")
 	@PutMapping("/{id}")
-	public ResponseEntity<Void> atualizar(@PathVariable ("id") Long id, @RequestBody Casa casa) {
+	public ResponseEntity<Void> atualizar(
+			@ApiParam(value = "ID de uma casa" , example = "1")
+			@PathVariable ("id") Long id, 
+			
+			@ApiParam(name = "Corpo", value = "Representação de uma casa atualizado")
+			@RequestBody Casa casa) {
 		casa.setId(id);
 		casaService.atualizar(casa);
 		return ResponseEntity.noContent().build();
 	}
+	
+	
 	
 }
 

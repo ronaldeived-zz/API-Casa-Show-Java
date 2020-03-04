@@ -9,7 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.gft.gerenciador.domain.Evento;
 import com.gft.gerenciador.repository.EventoRepository;
-import com.gft.gerenciador.service.exceptions.EventoNaoEncontradoException;
+import com.gft.gerenciador.service.exceptions.evento.EventoExistenteException;
+import com.gft.gerenciador.service.exceptions.evento.EventoNaoEncontradoException;
 
 @Service
 public class EventoService {
@@ -32,7 +33,13 @@ public class EventoService {
 	}
 	
 	public Evento salvar(Evento evento) {
-		evento.setId(null);
+		if (evento.getId() != null) {
+			Optional<Evento> a = eventoRepository.findById(evento.getId());
+			
+			if (a.isPresent()) {
+				throw new EventoExistenteException("O evento já existe");
+			}
+		}
 		return eventoRepository.save(evento);
 	}
 	
@@ -40,7 +47,7 @@ public class EventoService {
 		try {
 			eventoRepository.deleteById(id);
 		} catch (EmptyResultDataAccessException e) {
-			throw new EventoNaoEncontradoException("O livro não pôde ser encontrado.");
+			throw new EventoNaoEncontradoException("O evento não pôde ser encontrado.");
 		}
 		
 	}

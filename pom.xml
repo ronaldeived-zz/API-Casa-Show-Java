@@ -16,6 +16,7 @@
 
 	<properties>
 		<java.version>11</java.version>
+		<spring-fox.version>2.9.2</spring-fox.version>
 	</properties>
 
 	<dependencies>
@@ -27,6 +28,18 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.dataformat</groupId>
 			<artifactId>jackson-dataformat-xml</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>${spring-fox.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>${spring-fox.version}</version>
 		</dependency>
 		
 		<dependency>

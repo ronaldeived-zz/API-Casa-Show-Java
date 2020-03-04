@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.gft.gerenciador.domain.Usuario;
 import com.gft.gerenciador.repository.UsuarioRepository;
-import com.gft.gerenciador.service.exceptions.UsuarioNaoEncontradoException;
+import com.gft.gerenciador.service.exceptions.usuario.UsuarioNaoEncontradoException;
 
 @Service
 public class UsuarioService {

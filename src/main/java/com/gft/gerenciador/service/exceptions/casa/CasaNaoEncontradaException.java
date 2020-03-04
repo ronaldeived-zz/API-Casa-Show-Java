@@ -1,4 +1,4 @@
-package com.gft.gerenciador.service.exceptions;
+package com.gft.gerenciador.service.exceptions.casa;
 
 public class CasaNaoEncontradaException extends RuntimeException{
 

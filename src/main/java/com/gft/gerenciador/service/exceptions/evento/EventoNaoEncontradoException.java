@@ -1,4 +1,4 @@
-package com.gft.gerenciador.service.exceptions;
+package com.gft.gerenciador.service.exceptions.evento;
 
 public class EventoNaoEncontradoException extends RuntimeException{
 

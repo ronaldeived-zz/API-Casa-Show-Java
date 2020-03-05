@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.gft.gerenciador.domain.Evento;
@@ -61,4 +62,40 @@ public class EventoService {
 		buscar(evento.getId());
 	}
 	
+	public List<Evento> listarCrescenteNome(){
+		return eventoRepository.findAll(Sort.by(Sort.Direction.ASC,"nome"));
+	}
+
+	public List<Evento> listarDecrecenteNome(){
+		return eventoRepository.findAll(Sort.by(Sort.Direction.DESC,"nome"));
+	}
+	
+	public List<Evento> listarCrescenteCapacidade(){
+		return eventoRepository.findAll(Sort.by(Sort.Direction.ASC,"capacidade"));
+	}
+
+	public List<Evento> listarDecrecenteCapacidade(){
+		return eventoRepository.findAll(Sort.by(Sort.Direction.DESC,"capacidade"));
+	}
+	
+	public List<Evento> listarCrescenteData(){
+		return eventoRepository.findAll(Sort.by(Sort.Direction.ASC,"data"));
+	}
+
+	public List<Evento> listarDecrecenteData(){
+		return eventoRepository.findAll(Sort.by(Sort.Direction.DESC,"data"));
+	}
+	
+	public List<Evento> listarCrescentePreco(){
+		return eventoRepository.findAll(Sort.by(Sort.Direction.ASC,"preco"));
+	}
+
+	public List<Evento> listarDecrecentePreco(){
+		return eventoRepository.findAll(Sort.by(Sort.Direction.DESC,"preco"));
+	}
+	
+	public Evento buscarPorNome(String nome){
+		 Evento evento = eventoRepository.findByNome(nome);
+		return evento;
+	}
 }

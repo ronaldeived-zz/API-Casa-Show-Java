@@ -12,13 +12,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 
 @Entity
@@ -33,15 +33,18 @@ public class Evento {
 	@NotEmpty(message = "O campo nome não pode ser vazio.")
 	private String nome;
 	
-	@JsonInclude(Include.NON_NULL)
-	@NotEmpty(message = "O campo data não pode ser vazio.")
 	@ApiModelProperty(example = "20/02/2020")
 	@JsonFormat(pattern = "dd/MM/yyyy")
+	@NotNull(message = "O campo data não pode ser vazio.")
 	private Date data;
+	
+	@ApiModelProperty(example = "2500")
+	@NotNull(message = "O campo capacidade não pode ser vazio.")
+	private Double capacidade = null;
 	
 	@JsonInclude(Include.NON_NULL)
 	@ApiModelProperty(example = "100.00")
-	private double valorIngresso;
+	private double preco;
 	
 	@ManyToOne()
 	@JoinColumn(name = "CASA_ID")
@@ -50,9 +53,16 @@ public class Evento {
 	@OneToMany(mappedBy = "evento", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private List<Vendas> vendas;
+
 	
-	
-	
+	public Double getCapacidade() {
+		return capacidade;
+	}
+
+	public void setCapacidade(Double capacidade) {
+		this.capacidade = capacidade;
+	}
+
 	public List<Vendas> getVendas() {
 		return vendas;
 	}
@@ -69,12 +79,12 @@ public class Evento {
 		this.casa = casa;
 	}
 
-	public double getValorIngresso() {
-		return valorIngresso;
+	public double getPreco() {
+		return preco;
 	}
 
-	public void setValorIngresso(double valorIngresso) {
-		this.valorIngresso = valorIngresso;
+	public void setPreco(double preco) {
+		this.preco = preco;
 	}
 
 	public Long getId() {

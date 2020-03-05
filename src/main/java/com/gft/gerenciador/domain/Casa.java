@@ -32,6 +32,7 @@ public class Casa {
 	
 	@ApiModelProperty(example = "Rua ou avenida")
 	@JsonInclude(Include.NON_NULL)
+	@NotEmpty(message = "O campo endereço não pode ser vazio.")
 	private String endereco;
 	
 	@OneToMany(mappedBy = "casa", cascade = CascadeType.ALL)

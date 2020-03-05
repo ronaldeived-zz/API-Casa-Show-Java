@@ -7,5 +7,6 @@ import com.gft.gerenciador.domain.Casa;
 
 @Repository
 public interface CasaRepository extends JpaRepository<Casa, Long> {
-
+	
+	Casa findByNome(String nome);
 }

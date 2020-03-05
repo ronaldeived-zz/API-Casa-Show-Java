@@ -7,5 +7,6 @@ import com.gft.gerenciador.domain.Evento;
 
 @Repository
 public interface EventoRepository extends JpaRepository<Evento, Long>{
-
+	
+	Evento findByNome(String nome);
 }

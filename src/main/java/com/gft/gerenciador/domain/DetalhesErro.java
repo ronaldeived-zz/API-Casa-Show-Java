@@ -8,6 +8,16 @@ public class DetalhesErro {
 	
 	private Long timestamp;
 	
+	private String message;
+	
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
 
 	public String getTitulo() {
 		return titulo;

@@ -92,7 +92,23 @@ public class CasaResource {
 		return ResponseEntity.noContent().build();
 	}
 	
+	@ApiOperation("Listar as Casas em ordem alfabética crescente por nome")
+	@GetMapping("/asc")
+	public ResponseEntity<List<Casa>>listarCasaCrescente(){
+		return ResponseEntity.status(HttpStatus.OK).body(casaService.listarCrescente());
+	}
+
+	@ApiOperation("Listar as Casas em ordem alfabética decrescente por nome")
+	@GetMapping("/desc")
+	public ResponseEntity<List<Casa>>listarCasadecrecente(){
+		return ResponseEntity.status(HttpStatus.OK).body(casaService.listarDecrecente());
+	}
 	
+	@ApiOperation("Busca casa por nome.")
+	@GetMapping("/nome/{nome}")
+	public ResponseEntity<Casa> buscaPorNome(@PathVariable("nome") String nome){
+		return ResponseEntity.status(HttpStatus.OK).body(casaService.buscarPorNome(nome));
+	}
 	
 }
 

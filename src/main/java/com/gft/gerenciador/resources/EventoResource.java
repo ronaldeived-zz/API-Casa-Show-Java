@@ -90,4 +90,52 @@ public class EventoResource {
 		eventoService.atualizar(evento);
 		return ResponseEntity.noContent().build();
 	}
+	
+	@ApiOperation("Listar os eventos em ordem alfabética crescente por nome")
+	@GetMapping("/nome/asc")
+	public ResponseEntity<List<Evento>>listarCasaCrescenteNome(){
+		return ResponseEntity.status(HttpStatus.OK).body(eventoService.listarCrescenteNome());
+	}
+
+	@ApiOperation("Listar os eventos em ordem alfabética decrescente por nome")
+	@GetMapping("/nome/desc")
+	public ResponseEntity<List<Evento>>listarCasaDecrescenteNome(){
+		return ResponseEntity.status(HttpStatus.OK).body(eventoService.listarDecrecenteNome());
+	}
+	
+	@ApiOperation("Listar capacidade crescente")
+	@GetMapping("capacidade/asc")
+	public ResponseEntity<List<Evento>>listarCasaCrescenteCapacidade(){
+		return ResponseEntity.status(HttpStatus.OK).body(eventoService.listarCrescenteCapacidade());
+	}
+
+	@ApiOperation("Listar capacidade decrescente")
+	@GetMapping("/capacidade/desc")
+	public ResponseEntity<List<Evento>>listarCasaDecrescenteCapacidade(){
+		return ResponseEntity.status(HttpStatus.OK).body(eventoService.listarDecrecenteCapacidade());
+	}
+	
+	@ApiOperation("Listar data crescente")
+	@GetMapping("/data/asc")
+	public ResponseEntity<List<Evento>>listarCasaCrescenteData(){
+		return ResponseEntity.status(HttpStatus.OK).body(eventoService.listarCrescenteData());
+	}
+
+	@ApiOperation("Listar data decrescente")
+	@GetMapping("/data/desc")
+	public ResponseEntity<List<Evento>>listarCasaDecrescenteData(){
+		return ResponseEntity.status(HttpStatus.OK).body(eventoService.listarDecrecenteData());
+	}
+	
+	@ApiOperation("Listar preço crescente")
+	@GetMapping("/preco/asc")
+	public ResponseEntity<List<Evento>>listarCasaCrescentePreco(){
+		return ResponseEntity.status(HttpStatus.OK).body(eventoService.listarCrescentePreco());
+	}
+
+	@ApiOperation("Listar preço decrescente")
+	@GetMapping("/preco/desc")
+	public ResponseEntity<List<Evento>>listarCasaDecrescentePreco(){
+		return ResponseEntity.status(HttpStatus.OK).body(eventoService.listarDecrecentePreco());
+	}
 }

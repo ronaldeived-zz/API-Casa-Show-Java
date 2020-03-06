@@ -40,13 +40,14 @@ public class Evento {
 	
 	@ApiModelProperty(example = "2500")
 	@NotNull(message = "O campo capacidade não pode ser vazio.")
-	private Double capacidade = null;
+	private Double capacidade;
 	
-	@JsonInclude(Include.NON_NULL)
+	@NotNull(message = "O campo preço não pode ser vazio.")
 	@ApiModelProperty(example = "100.00")
-	private double preco;
+	private Double preco;
 	
 	@ManyToOne()
+	@NotNull(message = "O campo casa não pode ser vazio")
 	@JoinColumn(name = "CASA_ID")
 	private Casa casa;
 	
@@ -79,11 +80,11 @@ public class Evento {
 		this.casa = casa;
 	}
 
-	public double getPreco() {
+	public Double getPreco() {
 		return preco;
 	}
 
-	public void setPreco(double preco) {
+	public void setPreco(Double preco) {
 		this.preco = preco;
 	}
 

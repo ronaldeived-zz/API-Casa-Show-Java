@@ -7,8 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.gft.gerenciador.domain.Casa;
 import com.gft.gerenciador.domain.Usuario;
 import com.gft.gerenciador.repository.UsuarioRepository;
+import com.gft.gerenciador.service.exceptions.casa.CasaExistenteException;
+import com.gft.gerenciador.service.exceptions.usuario.UsuarioExistenteException;
 import com.gft.gerenciador.service.exceptions.usuario.UsuarioNaoEncontradoException;
 
 @Service
@@ -32,6 +35,19 @@ public class UsuarioService {
 	}
 	
 	public Usuario salvar(Usuario usuario) {
+		
+		Usuario usuarioNome = usuarios.findByNome(usuario.getNome());
+		if(usuarioNome != null) {
+			throw new UsuarioExistenteException("O usuario já existe");
+		}
+		
+		if (usuario.getId() != null) {
+			Optional<Usuario> a = usuarios.findById(usuario.getId());
+			
+			if (a.isPresent()) {
+				throw new UsuarioExistenteException("O usuario já existe");
+			}
+		}
 		return usuarios.save(usuario);
 	}
 	

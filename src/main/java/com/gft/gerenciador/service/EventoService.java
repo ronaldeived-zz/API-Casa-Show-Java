@@ -8,8 +8,10 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.gft.gerenciador.domain.Casa;
 import com.gft.gerenciador.domain.Evento;
 import com.gft.gerenciador.repository.EventoRepository;
+import com.gft.gerenciador.service.exceptions.casa.CasaExistenteException;
 import com.gft.gerenciador.service.exceptions.evento.EventoExistenteException;
 import com.gft.gerenciador.service.exceptions.evento.EventoNaoEncontradoException;
 
@@ -24,6 +26,7 @@ public class EventoService {
 	}
 	
 	public Optional<Evento> buscar(Long id) {
+		
 		Optional<Evento> evento = eventoRepository.findById(id);
 		
 		if (evento.isEmpty()) {
@@ -34,6 +37,7 @@ public class EventoService {
 	}
 	
 	public Evento salvar(Evento evento) {
+		
 		if (evento.getId() != null) {
 			Optional<Evento> a = eventoRepository.findById(evento.getId());
 			

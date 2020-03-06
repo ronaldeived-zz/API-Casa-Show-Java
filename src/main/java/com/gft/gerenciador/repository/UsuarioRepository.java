@@ -8,4 +8,5 @@ import com.gft.gerenciador.domain.Usuario;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
 
+	Usuario findByNome(String nome);
 }

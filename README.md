@@ -5,7 +5,7 @@ Versão do Java Usado. Java 11.0.5
 
 IDE Usada. Eclipse IDE for Enterprise Java Developers
 
-Documentação feita com Swagger2 e Swagger-UI, após de rodar a aplicação entre neste link: https://api-gerenciador-eventos.herokuapp.com/swagger-ui.html
+Documentação feita com Swagger2 e Swagger-UI: https://api-gerenciador-eventos.herokuapp.com/swagger-ui.html
 
 Para mais informações.
 

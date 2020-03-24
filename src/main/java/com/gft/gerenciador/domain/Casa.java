@@ -40,6 +40,17 @@ public class Casa {
 	private List<Evento> eventos;
 
 	
+	
+	
+	public Casa(@NotEmpty(message = "O campo nome não pode ser vazio.") String nome,
+			@NotEmpty(message = "O campo endereço não pode ser vazio.") String endereco) {
+		super();
+		this.nome = nome;
+		this.endereco = endereco;
+	}
+	
+	public Casa() {}
+
 	public List<Evento> getEventos() {
 		return eventos;
 	}

@@ -31,7 +31,15 @@ public class Usuario {
 	@JsonIgnore
 	private List<Vendas> vendas;
 	
-	
+	public Usuario() {
+		super();
+	}
+
+	public Usuario(@NotNull(message = "O campo nome não pode ser vazio.") String nome) {
+		super();
+		this.nome = nome;
+	}
+
 	public List<Vendas> getVendas() {
 		return vendas;
 	}

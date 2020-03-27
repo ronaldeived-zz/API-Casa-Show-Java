@@ -56,6 +56,28 @@ public class Evento {
 	private List<Vendas> vendas;
 
 	
+	
+	public Evento(@NotEmpty(message = "O campo nome não pode ser vazio.") String nome,
+			@NotNull(message = "O campo data não pode ser vazio.") Date data,
+			@NotNull(message = "O campo capacidade não pode ser vazio.") Double capacidade,
+			@NotNull(message = "O campo preço não pode ser vazio.") Double preco,
+			@NotNull(message = "O campo casa não pode ser vazio") Casa casa) {
+		super();
+		this.nome = nome;
+		this.data = data;
+		this.capacidade = capacidade;
+		this.preco = preco;
+		this.casa = casa;
+	}
+	
+	
+
+	public Evento() {
+		super();
+	}
+
+
+
 	public Double getCapacidade() {
 		return capacidade;
 	}

@@ -11,6 +11,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -18,19 +20,19 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.gft.gerenciador.domain.Casa;
 import com.gft.gerenciador.repository.CasaRepository;
+import com.gft.gerenciador.service.CasaService;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class CasaTestService {
+public class CasaServiceTest {
 	
 	private Casa casa;
 	 
 	@Autowired
 	private CasaRepository repository;
 	
-	@Rule
-	public ExpectedException thrown = ExpectedException.none();
+	@InjectMocks
+	private CasaService service;
 	
 	@Before
 	public void setup() {

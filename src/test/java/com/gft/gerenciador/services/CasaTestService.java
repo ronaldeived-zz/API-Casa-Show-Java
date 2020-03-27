@@ -2,6 +2,7 @@ package com.gft.gerenciador.services;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.verify;
 
 import org.hibernate.query.criteria.internal.expression.function.AggregationFunction.COUNT;
@@ -69,5 +70,15 @@ public class CasaTestService {
 		repository.save(casa2);
 		
 		System.out.println("Quantidade de casas: " + repository.count());
+	}
+	
+	@Test
+	public void deveBuscarCasaPeloId() {
+		casa = new Casa("Casa de show", "Endereço");
+	
+		repository.save(casa);
+		
+		//3 maneiras de se fazer o teste
+		assertThat(casa.getId());//(casa.getId(), casa.getId());//(casa.getId().toString(), true);
 	}
 }

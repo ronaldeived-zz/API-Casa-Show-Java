@@ -36,4 +36,23 @@ public class UsuarioServiceTest {
 		assertEquals("Ronaldeived", usuario.getNome());
 		assertThat(usuario.getId()).isNotNull();
 	}
+	
+	@Test
+	public void deveEditarUsuario() {
+		repository.save(usuario);
+		
+		usuario.setNome("Jõao");
+		repository.save(usuario);
+		
+		assertEquals(usuario.getNome(), "Jõao");
+	}
+	
+	@Test
+	public void deveDeletarUsuario() {
+		repository.save(usuario);
+		
+		repository.delete(usuario);
+		
+		assertThat(repository.findById(usuario.getId()).isEmpty());
+	}
 }

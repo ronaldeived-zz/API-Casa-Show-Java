@@ -40,9 +40,17 @@ public class Vendas {
 	@JoinColumn(name = "USUARIO_ID")
 	private Usuario usuario;
 	
+	public Vendas () {}
 	
+	public Vendas(@NotNull(message = "O campo quantidade não poder ser vazio.") Double quantidade,
+			@NotNull(message = "O campo evento não pode ser vazio.") Evento evento,
+			@NotNull(message = "O campo usuario não pode ser vazio.") Usuario usuario) {
+		super();
+		this.quantidade = quantidade;
+		this.evento = evento;
+		this.usuario = usuario;
+	}
 
-	
 	public Double getQuantidade() {
 		return quantidade;
 	}
